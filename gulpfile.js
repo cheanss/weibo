@@ -1,6 +1,7 @@
 const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
+var BrowserSync = require('laravel-elixir-browsersync2');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,6 +15,15 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(mix => {
+    BrowserSync.init();
+    mix.BrowserSync(
+    {
+        proxy           : "weibo.app",
+        logPrefix       : "Laravel Eixir BrowserSync",
+        logConnections  : false,
+        reloadOnRestart : false,
+        notify          : false
+    });
     mix.sass('app.scss')
-       .webpack('app.js');
+        .webpack('app.js');
 });
