@@ -8,6 +8,7 @@ class UsersController extends Controller
 {
     public function create()
     {
+        debug(['name'=>'chensuilong']);
         return view('users.create');
     }
 }
