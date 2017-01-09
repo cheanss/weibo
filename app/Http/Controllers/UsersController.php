@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -24,7 +25,6 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return view('users.show', compact('user'));
     }
 
@@ -42,6 +42,7 @@ class UsersController extends Controller
             'password' => $request->password,
         ]);
 
+        Auth::login($user);
         session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return redirect()->route('users.show', [$user]);
     }
