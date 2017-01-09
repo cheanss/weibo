@@ -24,6 +24,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return view('users.show', compact('user'));
     }
 
@@ -35,13 +36,13 @@ class UsersController extends Controller
             'password' => 'confirmed|required'
         ]);
 
-//        debug($request->all());
         $user = User::create([
            'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
 
+        session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return redirect()->route('users.show', [$user]);
     }
 }
